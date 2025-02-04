@@ -1,0 +1,61 @@
+# Compiled class files
+*.class
+*.jar
+*.war
+*.ear
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+.gradle-cache/
+bin/
+*.lock
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+out/
+
+# VS Code
+.vscode/
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# Spring Boot specific
+.env
+*.h2.db
+*.mv.db
+*.db
+data/
+dump.rdb
+
+# Lombok generated files
+.lombok/
+
+# Temporary files
+*.swp
+*.swo
+*.swn
+.DS_Store
+Thumbs.db
+
+# Application properties (if you want to keep them secret)
+# application.properties
+# application.yml
