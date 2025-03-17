@@ -9,19 +9,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/page")
+@RequestMapping("/students")
 public class StudentController {
     private final StudentService studentService;
 
     public StudentController(StudentService studentService){
         this.studentService = studentService;
-    }
+    }   
 
-    @GetMapping("/studentlist")
+    @GetMapping("/list")
     public ResponseEntity<List<Student>> studentList(){
         List<Student> students = studentService.studentList();
 
         return new ResponseEntity<>(students,HttpStatus.OK);
+    }
+
+    @GetMapping("/search/{id}")
+    public ResponseEntity<Student> findStudentById(@PathVariable("id") long Id){
+        return new ResponseEntity<>(studentService.findStudent(Id), HttpStatus.FOUND);
     }
 
     @PostMapping("/add")
@@ -29,5 +34,12 @@ public class StudentController {
         Student addedStudent = studentService.addStudent(student);
 
         return new ResponseEntity<>(addedStudent, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteStudent(@PathVariable("id") long Id){
+
+        studentService.deleteStudent(Id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

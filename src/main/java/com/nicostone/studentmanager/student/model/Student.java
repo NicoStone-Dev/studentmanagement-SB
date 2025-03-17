@@ -1,14 +1,16 @@
 package com.nicostone.studentmanager.student.model;
 
+import com.nicostone.studentmanager.courses.model.Course;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
-@Table
+@Table(name = "student")
 public class Student implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
     private long Id;
     private String name;
@@ -18,11 +20,12 @@ public class Student implements Serializable {
     private String courses;
     @Column(name = "student_code", unique = true, nullable = false, updatable = false)
     private String student_code;
+    private List<Course> joined_courses;
 
     public Student() {
     }
 
-    public Student(long id, String name, String email, String dateOfBirth, String grade_year, String courses, String student_code) {
+    public Student(long id, String name, String email, String dateOfBirth, String grade_year, String courses, String student_code, List<Course> joined_courses) {
         Id = id;
         this.name = name;
         this.email = email;
@@ -60,6 +63,10 @@ public class Student implements Serializable {
         return student_code;
     }
 
+    public List<Course> getJoined_courses() {
+        return joined_courses;
+    }
+
     public void setId(long id) {
         Id = id;
     }
@@ -86,6 +93,10 @@ public class Student implements Serializable {
 
     public void setStudent_code(String student_code) {
         this.student_code = student_code;
+    }
+
+    public void setJoined_courses(List<Course> joined_courses) {
+        this.joined_courses = joined_courses;
     }
 
     @Override

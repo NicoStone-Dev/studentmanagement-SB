@@ -1,5 +1,6 @@
 package com.nicostone.studentmanager.student.service;
 
+import com.nicostone.studentmanager.student.exception.UserNotFoundException;
 import com.nicostone.studentmanager.student.model.Student;
 import com.nicostone.studentmanager.student.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,18 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
+    public Student findStudent(long Id){
+        return studentRepository.findStudentById(Id)
+                .orElseThrow(() ->new UserNotFoundException("User with id: " + Id + " not found"));
+    }
 
+    public void deleteStudent(long Id){
+        if (studentRepository.existsById(Id)) {
+            studentRepository.deleteById(Id);
+        } else {
+            throw new UserNotFoundException("User with id: " + Id + " not found");
+        }
+
+
+    }
 }
