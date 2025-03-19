@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "student")
+@Table(name = "tb_student")
 public class Student implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,24 +17,35 @@ public class Student implements Serializable {
     private String email;
     private String dateOfBirth;
     private String grade_year;
-    private String courses;
     @Column(name = "student_code", unique = true, nullable = false, updatable = false)
     private String student_code;
-    private List<Course> joined_courses;
+
+
+    @ManyToOne
+    private Course attributedCourse;
 
     public Student() {
     }
 
-    public Student(long id, String name, String email, String dateOfBirth, String grade_year, String courses, String student_code, List<Course> joined_courses) {
-        Id = id;
+    //Constructors
+    public Student(String name, String email, String dateOfBirth, String grade_year, String student_code, List<Course> joined_courses) {
         this.name = name;
         this.email = email;
         this.dateOfBirth = dateOfBirth;
         this.grade_year = grade_year;
-        this.courses = courses;
         this.student_code = student_code;
+
+    }
+    // Getter and setter for the course the student is assigned
+    public Course getAttributedCourse() {
+        return attributedCourse;
     }
 
+    public void setAttributedCourse(Course attributedCourse) {
+        this.attributedCourse = attributedCourse;
+    }
+
+    //From here on down, we set the setters and getters for other variables
     public long getId() {
         return Id;
     }
@@ -55,20 +66,8 @@ public class Student implements Serializable {
         return grade_year;
     }
 
-    public String getCourses() {
-        return courses;
-    }
-
     public String getStudent_code() {
         return student_code;
-    }
-
-    public List<Course> getJoined_courses() {
-        return joined_courses;
-    }
-
-    public void setId(long id) {
-        Id = id;
     }
 
     public void setName(String name) {
@@ -87,17 +86,10 @@ public class Student implements Serializable {
         this.grade_year = grade_year;
     }
 
-    public void setCourses(String courses) {
-        this.courses = courses;
-    }
-
     public void setStudent_code(String student_code) {
         this.student_code = student_code;
     }
 
-    public void setJoined_courses(List<Course> joined_courses) {
-        this.joined_courses = joined_courses;
-    }
 
     @Override
     public String toString() {
@@ -107,8 +99,8 @@ public class Student implements Serializable {
                 ", email='" + email + '\'' +
                 ", dateOfBirth='" + dateOfBirth + '\'' +
                 ", grade_year='" + grade_year + '\'' +
-                ", courses='" + courses + '\'' +
-                ", student_code=" + student_code +
+                ", student_code='" + student_code + '\'' +
+                ", Course=" + attributedCourse +
                 '}';
     }
 }

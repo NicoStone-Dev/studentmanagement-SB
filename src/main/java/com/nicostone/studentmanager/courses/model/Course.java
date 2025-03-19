@@ -1,32 +1,53 @@
 package com.nicostone.studentmanager.courses.model;
 
+import com.nicostone.studentmanager.student.model.Student;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
-@Table(name = "courses")
+@Table(name = "tb_courses")
 public class Course implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false, updatable = false)
     long id;
     private String name;
-    private String hoursToFinish;
+    private int hoursToFinish;
+    private String mainTeacherName;
     private String mainTeacherEmail;
     @Column(name = "course_code", unique = true, nullable = false, updatable = false)
     private String course_code;
+
+    @OneToMany
+    private List<Student> studentList;
 
     public Course(){
 
     }
 
-    public Course(long id, String name, String hoursToFinish, String mainTeacherEmail, String course_code) {
-        this.id = id;
+    public Course(String name, int hoursToFinish, String mainTeacherEmail, String course_code) {
         this.name = name;
         this.hoursToFinish = hoursToFinish;
         this.mainTeacherEmail = mainTeacherEmail;
         this.course_code = course_code;
+    }
+
+    public String getMainTeacherName() {
+        return mainTeacherName;
+    }
+
+    public void setMainTeacherName(String mainTeacherName) {
+        this.mainTeacherName = mainTeacherName;
+    }
+
+    public List<Student> getStudentList() {
+        return studentList;
+    }
+
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
     }
 
     public long getId() {
@@ -37,7 +58,7 @@ public class Course implements Serializable{
         return name;
     }
 
-    public String getHoursToFinish() {
+    public int getHoursToFinish() {
         return hoursToFinish;
     }
 
@@ -57,7 +78,7 @@ public class Course implements Serializable{
         this.name = name;
     }
 
-    public void setHoursToFinish(String hoursToFinish) {
+    public void setHoursToFinish(int hoursToFinish) {
         this.hoursToFinish = hoursToFinish;
     }
 
