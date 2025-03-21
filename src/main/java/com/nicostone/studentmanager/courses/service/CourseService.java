@@ -3,6 +3,9 @@ package com.nicostone.studentmanager.courses.service;
 import com.nicostone.studentmanager.courses.model.Course;
 import com.nicostone.studentmanager.courses.repository.CourseRepo;
 import com.nicostone.studentmanager.courses.exceptions.CourseNotFoundException;
+import com.nicostone.studentmanager.student.exception.UserNotFoundException;
+import com.nicostone.studentmanager.student.model.Student;
+import com.nicostone.studentmanager.student.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +16,16 @@ import java.util.UUID;
 @Service
 public class CourseService {
     private final CourseRepo courseRepo;
+    private final StudentRepository studentRepo;
 
     @Autowired
-    public CourseService(CourseRepo courseRepo) {
+    public CourseService(CourseRepo courseRepo, StudentRepository studentRepo) {
         this.courseRepo = courseRepo;
+        this.studentRepo = studentRepo;
     }
 
     //List courses method
-    public List<Course> getCourses(){
+    public List<Course> getCourses() {
         return courseRepo.findAll();
     }
 
@@ -30,7 +35,10 @@ public class CourseService {
         return courseRepo.save(course);
     }
 
-    //TO-D0: an update method
+    //Update method
+    public Course updateCourse(Course course) {
+        return courseRepo.save(course);
+    }
 
     //Delete courses method
     public void deleteCourse(long ID) {
@@ -39,6 +47,27 @@ public class CourseService {
         } else {
             throw new CourseNotFoundException("course with id: " + ID + " not found");
         }
-        //We're gonna append the student list through here
+    }
+
+    public Course findCourse(long id){
+        return courseRepo.findCourseById(id)
+                .orElseThrow(() ->new UserNotFoundException("User with id: " + id + " not found"));
+    }
+
+    //We're going to append the student list through here
+    public void addToClass(long courseId, long studentId){
+            Student addedStudent = studentRepo.findStudentById(studentId)
+                    .orElseThrow(() -> new UserNotFoundException("Student with id: " + studentId + "not found")) ;
+            Course course = courseRepo.findCourseById(courseId)
+                    .orElseThrow(() -> new CourseNotFoundException("Course with id: " + courseId + "not found")) ;
+
+            System.out.println(addedStudent.toString());
+            System.out.println(course.toString());
+
+            course.getStudentList().add(addedStudent);
+            courseRepo.save(course);
+
+            addedStudent.setAttributedCourse(course);
+            studentRepo.save(addedStudent);
     }
 }

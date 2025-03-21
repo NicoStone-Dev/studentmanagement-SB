@@ -32,7 +32,9 @@ public class StudentService {
                 .orElseThrow(() ->new UserNotFoundException("User with id: " + Id + " not found"));
     }
 
-    //TO-D0: an update method
+    public Student updateStudent(Student student){
+        return studentRepository.save(student);
+    }
 
     public void deleteStudent(long Id){
         if (studentRepository.existsById(Id)) {
