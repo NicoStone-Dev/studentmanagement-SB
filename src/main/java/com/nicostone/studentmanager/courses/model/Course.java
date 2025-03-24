@@ -1,5 +1,6 @@
 package com.nicostone.studentmanager.courses.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.nicostone.studentmanager.student.model.Student;
 import jakarta.persistence.*;
 
@@ -21,6 +22,12 @@ public class Course implements Serializable{
     private String course_code;
 
     @OneToMany
+    @JsonManagedReference
+    /*
+      When trying to GET request, spring boot tries serializes student which pulls itself to courses,
+      Which then goes back to students, forming a loop and falling under recursion error.
+      That's why we use @JsonManagedReference, it allows serialization of the list bellow only.
+    */
     private List<Student> studentList;
 
     public Course(){

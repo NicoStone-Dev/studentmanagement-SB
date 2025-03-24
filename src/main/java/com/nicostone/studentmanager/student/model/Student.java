@@ -1,5 +1,6 @@
 package com.nicostone.studentmanager.student.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.nicostone.studentmanager.courses.model.Course;
 import jakarta.persistence.*;
 
@@ -22,6 +23,9 @@ public class Student implements Serializable {
 
 
     @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "course_id")
+    //Following the issue i had with the serialization, this BREAKS such so it doesn't go into recursion error.
     private Course attributedCourse;
 
     public Student() {
@@ -34,7 +38,6 @@ public class Student implements Serializable {
         this.dateOfBirth = dateOfBirth;
         this.grade_year = grade_year;
         this.student_code = student_code;
-
     }
     // Getter and setter for the course the student is assigned
     public Course getAttributedCourse() {
