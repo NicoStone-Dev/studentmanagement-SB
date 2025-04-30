@@ -5,7 +5,6 @@ import com.nicostone.studentmanager.courses.model.Course;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "tb_student")
@@ -21,10 +20,13 @@ public class Student implements Serializable {
     @Column(name = "student_code", unique = true, nullable = false, updatable = false)
     private String student_code;
 
-
-    @ManyToOne
+    /*
+        Fetch type tells the database the kind of priority is offered for each class in the relation,
+        if it's set to lazy, the class will be loaded on demand, if it's set to EAGER the it'll be loaded as soon as possible.
+    */
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="attributedCourse_id", nullable = true)
     @JsonBackReference
-    @JoinColumn(name = "course_id")
     //Following the issue i had with the serialization, this BREAKS such so it doesn't go into recursion error.
     private Course attributedCourse;
 
@@ -32,7 +34,7 @@ public class Student implements Serializable {
     }
 
     //Constructors
-    public Student(String name, String email, String dateOfBirth, String grade_year, String student_code, List<Course> joined_courses) {
+    public Student(String name, String email, String dateOfBirth, String grade_year, String student_code) {
         this.name = name;
         this.email = email;
         this.dateOfBirth = dateOfBirth;
@@ -93,6 +95,9 @@ public class Student implements Serializable {
         this.student_code = student_code;
     }
 
+    public void setId(long id) {
+        Id = id;
+    }
 
     @Override
     public String toString() {

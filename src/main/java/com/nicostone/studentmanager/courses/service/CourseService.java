@@ -68,6 +68,6 @@ public class CourseService {
             courseRepo.save(course);
 
             addedStudent.setAttributedCourse(course);
-            studentRepo.save(addedStudent);
+            studentRepo.save(addedStudent); 
     }
 }

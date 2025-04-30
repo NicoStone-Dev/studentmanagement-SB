@@ -21,7 +21,9 @@ public class Course implements Serializable{
     @Column(name = "course_code", unique = true, nullable = false, updatable = false)
     private String course_code;
 
-    @OneToMany
+    // The mappedby was added to tell hibernate that the instance of course is what manages the relationship
+    // However, the cascade type just tells hibernate which degree of changes made to the course will be passed onto its children, such as students.
+    @OneToMany(mappedBy = "attributedCourse", cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     @JsonManagedReference
     /*
       When trying to GET request, spring boot tries serializes student which pulls itself to courses,
