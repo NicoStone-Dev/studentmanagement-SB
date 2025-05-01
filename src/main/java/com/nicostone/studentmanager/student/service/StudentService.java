@@ -1,5 +1,6 @@
 package com.nicostone.studentmanager.student.service;
 
+import com.nicostone.studentmanager.student.DTOs.updateStudentDTO;
 import com.nicostone.studentmanager.student.exception.UserNotFoundException;
 import com.nicostone.studentmanager.student.model.Student;
 import com.nicostone.studentmanager.student.repository.StudentRepository;
@@ -18,30 +19,45 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public Student addStudent(Student student){
+    public Student addStudent(Student student) {
         student.setStudent_code(UUID.randomUUID().toString());
         return studentRepository.save(student);
     }
 
-    public List<Student> studentList(){
+    public List<Student> studentList() {
         return studentRepository.findAll();
     }
 
-    public Student findStudent(long Id){
+    public Student findStudent(long Id) {
         return studentRepository.findStudentById(Id)
-                .orElseThrow(() ->new UserNotFoundException("User with id: " + Id + " not found"));
+                .orElseThrow(() -> new UserNotFoundException("User with id: " + Id + " not found"));
     }
 
-    public Student updateStudent(Student student){
+    public Student updateStudent(long id, updateStudentDTO patchStudent) {
+        Student student = findStudent(id);
+
+        if (patchStudent.getName() != null) {
+            student.setName(patchStudent.getName());
+        }
+        if (patchStudent.getEmail() != null) {
+            student.setEmail(patchStudent.getEmail());
+        }
+        if (patchStudent.getDateOfBirth() != null) {
+            student.setDateOfBirth(patchStudent.getDateOfBirth());
+        }
+        if(patchStudent.getGrade_year() != null){
+            student.setGrade_year(patchStudent.getGrade_year());
+        }
+
         return studentRepository.save(student);
     }
 
-    public void deleteStudent(long Id){
+    public void deleteStudent(long Id) {
         if (studentRepository.existsById(Id)) {
             studentRepository.deleteById(Id);
         } else {
             throw new UserNotFoundException("User with id: " + Id + " not found");
-    }
+        }
 
 
     }

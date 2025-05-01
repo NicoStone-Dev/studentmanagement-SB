@@ -1,5 +1,6 @@
 package com.nicostone.studentmanager.courses.controller;
 
+import com.nicostone.studentmanager.courses.DTOs.updateCourseDTO;
 import com.nicostone.studentmanager.courses.model.Course;
 import com.nicostone.studentmanager.courses.service.CourseService;
 import org.springframework.http.HttpStatus;
@@ -31,10 +32,10 @@ public class CourseController{
         );
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<Course> updateCourse(@RequestBody Course course){
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<Course> updateCourse(@PathVariable("id") long id, @RequestBody updateCourseDTO course){
         return new ResponseEntity<Course>(
-                courseService.updateCourse(course), HttpStatus.OK
+                courseService.updateCourse(id, course), HttpStatus.OK
         );
     }
 

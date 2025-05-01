@@ -2,7 +2,7 @@ package com.nicostone.studentmanager.student.controller;
 
 import com.nicostone.studentmanager.student.model.Student;
 import com.nicostone.studentmanager.student.service.StudentService;
-import org.hibernate.sql.Update;
+import com.nicostone.studentmanager.student.DTOs.updateStudentDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,10 +37,10 @@ public class StudentController {
         return new ResponseEntity<>(addedStudent, HttpStatus.CREATED);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<Student> updateStudent(Student student){
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<Student> updateStudent(@PathVariable("id") long id, @RequestBody updateStudentDTO student){
         return new ResponseEntity<Student>(
-                studentService.updateStudent(student), HttpStatus.OK
+                studentService.updateStudent(id, student), HttpStatus.OK
                 );
     }
 

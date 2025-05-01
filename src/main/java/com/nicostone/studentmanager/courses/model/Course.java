@@ -15,7 +15,7 @@ public class Course implements Serializable{
     @Column(unique = true, nullable = false, updatable = false)
     long id;
     private String name;
-    private int hoursToFinish;
+    private Integer hoursToFinish;
     private String mainTeacherName;
     private String mainTeacherEmail;
     @Column(name = "course_code", unique = true, nullable = false, updatable = false)
@@ -36,7 +36,7 @@ public class Course implements Serializable{
 
     }
 
-    public Course(String name, int hoursToFinish, String mainTeacherEmail, String course_code) {
+    public Course(String name, Integer hoursToFinish, String mainTeacherEmail, String course_code) {
         this.name = name;
         this.hoursToFinish = hoursToFinish;
         this.mainTeacherEmail = mainTeacherEmail;
@@ -67,7 +67,7 @@ public class Course implements Serializable{
         return name;
     }
 
-    public int getHoursToFinish() {
+    public Integer getHoursToFinish() {
         return hoursToFinish;
     }
 
@@ -87,7 +87,7 @@ public class Course implements Serializable{
         this.name = name;
     }
 
-    public void setHoursToFinish(int hoursToFinish) {
+    public void setHoursToFinish(Integer hoursToFinish) {
         this.hoursToFinish = hoursToFinish;
     }
 

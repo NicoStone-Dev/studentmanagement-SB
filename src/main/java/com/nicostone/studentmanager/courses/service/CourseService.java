@@ -1,5 +1,6 @@
 package com.nicostone.studentmanager.courses.service;
 
+import com.nicostone.studentmanager.courses.DTOs.updateCourseDTO;
 import com.nicostone.studentmanager.courses.model.Course;
 import com.nicostone.studentmanager.courses.repository.CourseRepo;
 import com.nicostone.studentmanager.courses.exceptions.CourseNotFoundException;
@@ -36,7 +37,22 @@ public class CourseService {
     }
 
     //Update method
-    public Course updateCourse(Course course) {
+    public Course updateCourse(long id, updateCourseDTO patchCourse) {
+        Course course = findCourse(id);
+
+        if (patchCourse.getName() != null) {
+            course.setName(patchCourse.getName());
+        }
+        if (patchCourse.getMainTeacherEmail() != null) {
+            course.setMainTeacherEmail(patchCourse.getMainTeacherEmail());
+        }
+        if (patchCourse.getMainTeacherName() != null) {
+            course.setMainTeacherName(patchCourse.getMainTeacherName());
+        }
+        if(patchCourse.getHoursToFinish() != null){
+            course.setHoursToFinish(patchCourse.getHoursToFinish());
+        }
+
         return courseRepo.save(course);
     }
 
