@@ -1,6 +1,7 @@
 package com.nicostone.studentmanager.student.service;
 
-import com.nicostone.studentmanager.student.DTOs.updateStudentDTO;
+import com.nicostone.studentmanager.courses.service.CourseService;
+import com.nicostone.studentmanager.student.DTOs.StudentDTO;
 import com.nicostone.studentmanager.student.exception.UserNotFoundException;
 import com.nicostone.studentmanager.student.model.Student;
 import com.nicostone.studentmanager.student.repository.StudentRepository;
@@ -13,10 +14,12 @@ import java.util.UUID;
 @Service
 public class StudentService {
     private final StudentRepository studentRepository;
+    private final CourseService courseService;
 
     @Autowired
-    public StudentService(StudentRepository studentRepository) {
+    public StudentService(StudentRepository studentRepository, CourseService courseService) {
         this.studentRepository = studentRepository;
+        this.courseService = courseService;
     }
 
     public Student addStudent(Student student) {
@@ -25,6 +28,7 @@ public class StudentService {
     }
 
     public List<Student> studentList() {
+
         return studentRepository.findAll();
     }
 
@@ -33,7 +37,7 @@ public class StudentService {
                 .orElseThrow(() -> new UserNotFoundException("User with id: " + Id + " not found"));
     }
 
-    public Student updateStudent(long id, updateStudentDTO patchStudent) {
+    public Student updateStudent(long id, StudentDTO patchStudent) {
         Student student = findStudent(id);
 
         if (patchStudent.getName() != null) {
@@ -45,7 +49,7 @@ public class StudentService {
         if (patchStudent.getDateOfBirth() != null) {
             student.setDateOfBirth(patchStudent.getDateOfBirth());
         }
-        if(patchStudent.getGrade_year() != null){
+        if (patchStudent.getGrade_year() != null) {
             student.setGrade_year(patchStudent.getGrade_year());
         }
 
@@ -58,7 +62,5 @@ public class StudentService {
         } else {
             throw new UserNotFoundException("User with id: " + Id + " not found");
         }
-
-
     }
 }

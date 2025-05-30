@@ -1,8 +1,9 @@
 package com.nicostone.studentmanager.courses.controller;
 
-import com.nicostone.studentmanager.courses.DTOs.updateCourseDTO;
+import com.nicostone.studentmanager.courses.DTOs.CourseDTO;
 import com.nicostone.studentmanager.courses.model.Course;
 import com.nicostone.studentmanager.courses.service.CourseService;
+import com.nicostone.studentmanager.student.model.Student;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,11 @@ public class CourseController{
         return new ResponseEntity<Course>(courseService.findCourse(id), HttpStatus.FOUND);
     }
 
+    @GetMapping("/{id}/show/students")
+    public ResponseEntity<List<Student>> showStudents(@PathVariable("id") long courseId){
+        return new ResponseEntity<>(courseService.showClassStud(courseId), HttpStatus.ACCEPTED);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<Course> addCourse(@RequestBody Course course){
         return new ResponseEntity<Course>(
@@ -38,7 +44,7 @@ public class CourseController{
     }
 
     @PatchMapping("/update/{id}")
-    public ResponseEntity<Course> updateCourse(@PathVariable("id") long id, @RequestBody updateCourseDTO course){
+    public ResponseEntity<Course> updateCourse(@PathVariable("id") long id, @RequestBody CourseDTO course){
         return new ResponseEntity<Course>(
                 courseService.updateCourse(id, course), HttpStatus.OK
         );

@@ -2,7 +2,7 @@ package com.nicostone.studentmanager.student.controller;
 
 import com.nicostone.studentmanager.student.model.Student;
 import com.nicostone.studentmanager.student.service.StudentService;
-import com.nicostone.studentmanager.student.DTOs.updateStudentDTO;
+import com.nicostone.studentmanager.student.DTOs.StudentDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +38,7 @@ public class StudentController {
     }
 
     @PatchMapping("/update/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable("id") long id, @RequestBody updateStudentDTO student){
+    public ResponseEntity<Student> updateStudent(@PathVariable("id") long id, @RequestBody StudentDTO student){
         return new ResponseEntity<Student>(
                 studentService.updateStudent(id, student), HttpStatus.OK
                 );

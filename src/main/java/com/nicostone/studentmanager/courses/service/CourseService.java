@@ -1,6 +1,6 @@
 package com.nicostone.studentmanager.courses.service;
 
-import com.nicostone.studentmanager.courses.DTOs.updateCourseDTO;
+import com.nicostone.studentmanager.courses.DTOs.CourseDTO;
 import com.nicostone.studentmanager.courses.model.Course;
 import com.nicostone.studentmanager.courses.repository.CourseRepo;
 import com.nicostone.studentmanager.courses.exceptions.CourseNotFoundException;
@@ -37,7 +37,7 @@ public class CourseService {
     }
 
     //Update method
-    public Course updateCourse(long id, updateCourseDTO patchCourse) {
+    public Course updateCourse(long id, CourseDTO patchCourse) {
         Course course = findCourse(id);
 
         if (patchCourse.getName() != null) {
@@ -67,15 +67,19 @@ public class CourseService {
 
     public Course findCourse(long id){
         return courseRepo.findCourseById(id)
-                .orElseThrow(() ->new UserNotFoundException("User with id: " + id + " not found"));
+                .orElseThrow(() ->new CourseNotFoundException("Course with id: " + id + " not found"));
+    }
+
+    public List<Student> showClassStud(long id){
+        Course current = this.findCourse(id);
+        return current.getStudentList();
     }
 
     //We're going to append the student list through here
     public void addToClass(long courseId, long studentId){
             Student addedStudent = studentRepo.findStudentById(studentId)
                     .orElseThrow(() -> new UserNotFoundException("Student with id: " + studentId + "not found")) ;
-            Course course = courseRepo.findCourseById(courseId)
-                    .orElseThrow(() -> new CourseNotFoundException("Course with id: " + courseId + "not found")) ;
+            Course course = this.findCourse(courseId);
 
             System.out.println(addedStudent.toString());
             System.out.println(course.toString());
@@ -84,6 +88,6 @@ public class CourseService {
             courseRepo.save(course);
 
             addedStudent.setAttributedCourse(course);
-            studentRepo.save(addedStudent); 
+            studentRepo.save(addedStudent);
     }
 }

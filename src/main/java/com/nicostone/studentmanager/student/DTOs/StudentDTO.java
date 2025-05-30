@@ -2,7 +2,7 @@ package com.nicostone.studentmanager.student.DTOs;
 
 import jakarta.annotation.Nullable;
 
-public class updateStudentDTO {
+public class StudentDTO {
     @Nullable
     private String name;
     @Nullable

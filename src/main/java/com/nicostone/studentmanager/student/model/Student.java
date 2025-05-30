@@ -29,7 +29,7 @@ public class Student implements Serializable {
     @JsonBackReference
     //Following the issue i had with the serialization, this BREAKS such so it doesn't go into recursion error.
     private Course attributedCourse;
-
+    
     public Student() {
     }
 
@@ -49,6 +49,7 @@ public class Student implements Serializable {
     public void setAttributedCourse(Course attributedCourse) {
         this.attributedCourse = attributedCourse;
     }
+
 
     //From here on down, we set the setters and getters for other variables
     public long getId() {
@@ -93,10 +94,6 @@ public class Student implements Serializable {
 
     public void setStudent_code(String student_code) {
         this.student_code = student_code;
-    }
-
-    public void setId(long id) {
-        Id = id;
     }
 
 
