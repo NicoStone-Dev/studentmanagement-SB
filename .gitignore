@@ -57,5 +57,6 @@ dump.rdb
 Thumbs.db
 
 # Application properties (if you want to keep them secret)
+src\main\resources\application.properties
 # application.properties
 # application.yml
