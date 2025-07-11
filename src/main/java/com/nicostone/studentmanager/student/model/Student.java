@@ -24,12 +24,12 @@ public class Student implements Serializable {
         Fetch type tells the database the kind of priority is offered for each class in the relation,
         if it's set to lazy, the class will be loaded on demand, if it's set to EAGER the it'll be loaded as soon as possible.
     */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="attributedCourse_id", nullable = true)
     @JsonBackReference
     //Following the issue i had with the serialization, this BREAKS such so it doesn't go into recursion error.
     private Course attributedCourse;
-    
+
     public Student() {
     }
 

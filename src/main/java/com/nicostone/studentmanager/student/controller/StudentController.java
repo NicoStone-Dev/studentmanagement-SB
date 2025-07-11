@@ -34,7 +34,7 @@ public class StudentController {
     public ResponseEntity<Student> newStudent(@RequestBody Student student) {
         Student addedStudent = studentService.addStudent(student);
 
-        return new ResponseEntity<>(addedStudent, HttpStatus.CREATED);
+        return new ResponseEntity<Student>(addedStudent, HttpStatus.CREATED);
     }
 
     @PatchMapping("/update/{id}")

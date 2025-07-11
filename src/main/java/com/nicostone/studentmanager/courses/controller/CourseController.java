@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/courses")
@@ -40,7 +41,7 @@ public class CourseController{
     public ResponseEntity<Course> addCourse(@RequestBody Course course){
         return new ResponseEntity<Course>(
                 courseService.addCourse(course), HttpStatus.OK
-        );
+        );  
     }
 
     @PatchMapping("/update/{id}")
@@ -51,9 +52,9 @@ public class CourseController{
     }
 
     @PutMapping("/join/course/{courseId}/student/{studentId}")
-    public ResponseEntity<String> joinStudent(@PathVariable long courseId, @PathVariable long studentId){
+    public ResponseEntity<Map<String, String>> joinStudent(@PathVariable long courseId, @PathVariable long studentId){
         courseService.addToClass(courseId, studentId);
-        return ResponseEntity.ok("Student has joined class");
+        return ResponseEntity.ok(Map.of("message","Student has joined class"));
     }
 
     @DeleteMapping("/delete/{id}")
