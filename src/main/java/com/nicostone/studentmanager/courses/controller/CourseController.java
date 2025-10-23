@@ -1,6 +1,7 @@
 package com.nicostone.studentmanager.courses.controller;
 
 import com.nicostone.studentmanager.courses.DTOs.CourseDTO;
+import com.nicostone.studentmanager.courses.exceptions.CourseNotFoundException;
 import com.nicostone.studentmanager.courses.model.Course;
 import com.nicostone.studentmanager.courses.service.CourseService;
 import com.nicostone.studentmanager.student.model.Student;
@@ -59,7 +60,11 @@ public class CourseController{
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteCourse(@PathVariable("id") long id){
-        courseService.deleteCourse(id);
-        return new ResponseEntity<>(HttpStatus.FOUND);
+        try {
+            courseService.deleteCourse(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (CourseNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Return 404 if course not found
+        }
     }
 }
