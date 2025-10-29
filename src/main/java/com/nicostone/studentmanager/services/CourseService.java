@@ -4,9 +4,9 @@ import com.nicostone.studentmanager.courses.DTOs.CourseDTO;
 import com.nicostone.studentmanager.courses.model.Course;
 import com.nicostone.studentmanager.courses.repository.CourseRepo;
 import com.nicostone.studentmanager.courses.exceptions.CourseNotFoundException;
-import com.nicostone.studentmanager.student.exception.UserNotFoundException;
-import com.nicostone.studentmanager.student.model.Student;
-import com.nicostone.studentmanager.student.repository.StudentRepository;
+import com.nicostone.studentmanager.exceptions.UserNotFoundException;
+import com.nicostone.studentmanager.models.Student;
+import com.nicostone.studentmanager.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

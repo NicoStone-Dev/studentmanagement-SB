@@ -1,7 +1,7 @@
 package com.nicostone.studentmanager.courses.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.nicostone.studentmanager.student.model.Student;
+import com.nicostone.studentmanager.models.Student;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
