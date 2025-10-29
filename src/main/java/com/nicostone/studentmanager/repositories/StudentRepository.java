@@ -1,6 +1,6 @@
-package com.nicostone.studentmanager.student.repository;
+package com.nicostone.studentmanager.repositories;
 
-import com.nicostone.studentmanager.student.model.Student;
+import com.nicostone.studentmanager.models.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

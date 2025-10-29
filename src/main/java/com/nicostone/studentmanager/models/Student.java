@@ -1,7 +1,6 @@
-package com.nicostone.studentmanager.student.model;
+package com.nicostone.studentmanager.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.nicostone.studentmanager.courses.model.Course;
 import jakarta.persistence.*;
 
 import java.io.Serializable;

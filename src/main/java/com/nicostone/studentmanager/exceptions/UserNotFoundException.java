@@ -1,4 +1,4 @@
-package com.nicostone.studentmanager.student.exception;
+package com.nicostone.studentmanager.exceptions;
 
 public class UserNotFoundException extends RuntimeException{
 

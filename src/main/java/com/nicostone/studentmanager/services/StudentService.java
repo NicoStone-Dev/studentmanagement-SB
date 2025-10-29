@@ -1,10 +1,9 @@
-package com.nicostone.studentmanager.student.service;
+package com.nicostone.studentmanager.services;
 
-import com.nicostone.studentmanager.courses.service.CourseService;
-import com.nicostone.studentmanager.student.DTOs.StudentDTO;
-import com.nicostone.studentmanager.student.exception.UserNotFoundException;
-import com.nicostone.studentmanager.student.model.Student;
-import com.nicostone.studentmanager.student.repository.StudentRepository;
+import com.nicostone.studentmanager.models.StudentDTO;
+import com.nicostone.studentmanager.exceptions.UserNotFoundException;
+import com.nicostone.studentmanager.models.Student;
+import com.nicostone.studentmanager.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

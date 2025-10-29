@@ -1,9 +1,8 @@
-package com.nicostone.studentmanager.student.controller;
+package com.nicostone.studentmanager.controllers;
 
-import com.nicostone.studentmanager.courses.exceptions.CourseNotFoundException;
-import com.nicostone.studentmanager.student.model.Student;
-import com.nicostone.studentmanager.student.service.StudentService;
-import com.nicostone.studentmanager.student.DTOs.StudentDTO;
+import com.nicostone.studentmanager.models.Student;
+import com.nicostone.studentmanager.services.StudentService;
+import com.nicostone.studentmanager.models.StudentDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -47,11 +46,7 @@ public class StudentController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable("id") long Id){
-        try {
-            studentService.deleteStudent(Id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (CourseNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        studentService.deleteStudent(Id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

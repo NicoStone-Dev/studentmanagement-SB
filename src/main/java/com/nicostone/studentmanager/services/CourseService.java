@@ -1,9 +1,9 @@
-package com.nicostone.studentmanager.courses.service;
+package com.nicostone.studentmanager.services;
 
-import com.nicostone.studentmanager.courses.DTOs.CourseDTO;
-import com.nicostone.studentmanager.courses.model.Course;
-import com.nicostone.studentmanager.courses.repository.CourseRepo;
-import com.nicostone.studentmanager.courses.exceptions.CourseNotFoundException;
+import com.nicostone.studentmanager.models.CourseDTO;
+import com.nicostone.studentmanager.models.Course;
+import com.nicostone.studentmanager.repositories.CourseRepo;
+import com.nicostone.studentmanager.exceptions.CourseNotFoundException;
 import com.nicostone.studentmanager.exceptions.UserNotFoundException;
 import com.nicostone.studentmanager.models.Student;
 import com.nicostone.studentmanager.repositories.StudentRepository;

@@ -1,4 +1,4 @@
-package com.nicostone.studentmanager.courses.exceptions;
+package com.nicostone.studentmanager.exceptions;
 
 public class CourseNotFoundException extends RuntimeException{
     public CourseNotFoundException(String message) {

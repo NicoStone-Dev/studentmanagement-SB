@@ -1,4 +1,4 @@
-package com.nicostone.studentmanager.student.DTOs;
+package com.nicostone.studentmanager.models;
 
 import jakarta.annotation.Nullable;
 
