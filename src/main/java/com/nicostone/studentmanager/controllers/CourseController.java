@@ -45,7 +45,6 @@ public class CourseController{
         );
     }
 
-    @PutMapping("/join/course/{courseId}/student/{studentId}")
     public ResponseEntity<Map<String, String>> joinStudent(@PathVariable long courseId, @PathVariable long studentId) {
         courseService.addToClass(courseId, studentId);
         return ResponseEntity.ok(Map.of("message", "Student has joined class"));
