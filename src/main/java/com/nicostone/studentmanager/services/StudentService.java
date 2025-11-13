@@ -13,12 +13,10 @@ import java.util.UUID;
 @Service
 public class StudentService {
     private final StudentRepository studentRepository;
-    private final CourseService courseService;
 
     @Autowired
-    public StudentService(StudentRepository studentRepository, CourseService courseService) {
+    public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
-        this.courseService = courseService;
     }
 
     public Student addStudent(Student student) {

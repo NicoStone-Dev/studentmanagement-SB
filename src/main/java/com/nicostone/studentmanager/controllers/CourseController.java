@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/courses")
 public class CourseController{
     private final CourseService courseService;
 
@@ -20,31 +19,26 @@ public class CourseController{
         this.courseService = courseService;
     }
 
-    @GetMapping("/list")
     public ResponseEntity<List<Course>> courseList(){
         return new ResponseEntity<List<Course>>(
                 courseService.getCourses(), HttpStatus.OK
         );
     }
 
-    @GetMapping("/search/{id}")
     public ResponseEntity<Course> findCourseById(@PathVariable("id") long id){
         return new ResponseEntity<Course>(courseService.findCourse(id), HttpStatus.FOUND);
     }
 
-    @GetMapping("/{id}/show/students")
     public ResponseEntity<List<Student>> showStudents(@PathVariable("id") long courseId){
         return new ResponseEntity<>(courseService.showClassStud(courseId), HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/add")
     public ResponseEntity<Course> addCourse(@RequestBody Course course){
         return new ResponseEntity<Course>(
                 courseService.addCourse(course), HttpStatus.OK
         );  
     }
 
-    @PatchMapping("/update/{id}")
     public ResponseEntity<Course> updateCourse(@PathVariable("id") long id, @RequestBody CourseDTO course){
         return new ResponseEntity<Course>(
                 courseService.updateCourse(id, course), HttpStatus.OK
@@ -52,14 +46,13 @@ public class CourseController{
     }
 
     @PutMapping("/join/course/{courseId}/student/{studentId}")
-    public ResponseEntity<Map<String, String>> joinStudent(@PathVariable long courseId, @PathVariable long studentId){
+    public ResponseEntity<Map<String, String>> joinStudent(@PathVariable long courseId, @PathVariable long studentId) {
         courseService.addToClass(courseId, studentId);
-        return ResponseEntity.ok(Map.of("message","Student has joined class"));
+        return ResponseEntity.ok(Map.of("message", "Student has joined class"));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteCourse(@PathVariable("id") long id){
+    public ResponseEntity<Map<String, String>> deleteCourse(@PathVariable("id") long id){
         courseService.deleteCourse(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok(Map.of("message","Course Has Been Deleted! "));
     }
 }
